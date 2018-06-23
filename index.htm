@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Blog Api</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <script src="assets/js/jquery.min.js"></script>
+
+    <script>
+        $.ajax({
+            url: "http://192.168.200.63:8080/users",
+            headers: { 'Authorization': 'Bearer 62424150-335d-4761-8c27-212d37c41d8c' },
+            success: function (data) {
+                var table = $("tabla_usuario");
+                data.forEach(function (usuario) {
+                    var tr = document.createElement("tr");
+                    var tdId = document.createElement("td");
+                    var tdEmail = document.createElement("td");
+                    var tdNombre = document.createElement("td");
+
+                    tdId.textContent = usuario.Id;
+                    tdEmail.textContent = usuario.email;
+                    tdNombre.textContent = usuario.name;
+
+                    tr.appendChild(tdId);
+                    tr.appendChild(tdEmail);
+                    tr.appendChild(tdNombre);
+                    table.append(tr);
+
+
+                });
+
+                console.log(data);
+            },
+            error: function (er) {
+                console.log(er);
+            }
+        })
+
+    </script>
+
+</head>
+
+<body>
+
+    <div>
+
+        <table  id="tabla_usuario">
+            <thead>
+
+            </thead>
+            <th></th>
+            <th></th>
+            <th></th>
+            <tbody id="tabla_usuario">
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
