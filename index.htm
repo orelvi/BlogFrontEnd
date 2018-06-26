@@ -13,7 +13,7 @@
             url: "http://127.0.0.1:8080/users",
             headers: { 'Authorization': 'Bearer 00600d01-cf83-437b-828e-822567c279fa' },
             success: function (data) {
-                var table = $('tabla_usuario');
+                var table = document.getElementById("tabla_usuario");
                 data.forEach(function (usuario) {
                     var tr = document.createElement("tr");
                     var tdId = document.createElement("td");
