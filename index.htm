@@ -10,8 +10,8 @@
 
     <script>
         $.ajax({
-            url: "http://192.168.200.63:8080/users",
-            headers: { 'Authorization': 'Bearer 62424150-335d-4761-8c27-212d37c41d8c' },
+            url: "http://127.0.0.1:8080/users",
+            headers: { 'Authorization': 'Bearer 2000f2be-461e-44f4-ae79-0b1976ceea4b' },
             success: function (data) {
                 var table = $("tabla_usuario");
                 data.forEach(function (usuario) {
@@ -47,13 +47,13 @@
 
     <div>
 
-        <table  id="tabla_usuario">
+        <table class="table">
             <thead>
 
             </thead>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nombre</th>
             <tbody id="tabla_usuario">
 
             </tbody>

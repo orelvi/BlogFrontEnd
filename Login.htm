@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Blog Api</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <script src="assets/js/jquery.min.js"></script>
+
+    <script>
+
+        function Login() {
+            
+            
+            $.ajax({
+                url: "http://127.0.0.1:8080/login",
+                data: { 'Authorization': 'Bearer 2000f2be-461e-44f4-ae79-0b1976ceea4b' },
+
+                success: function (data) {
+                    var table = $("tabla_usuario");
+                    data.forEach(function (usuario) {
+                        var tr = document.createElement("tr");
+                        var tdId = document.createElement("td");
+                        var tdEmail = document.createElement("td");
+                        var tdNombre = document.createElement("td");
+
+                        tdId.textContent = usuario.Id;
+                        tdEmail.textContent = usuario.email;
+                        tdNombre.textContent = usuario.name;
+
+                        tr.appendChild(tdId);
+                        tr.appendChild(tdEmail);
+                        tr.appendChild(tdNombre);
+                        table.append(tr);
+
+
+                    });
+
+                    console.log(data);
+                },
+                error: function (er) {
+                    console.log(er);
+                }
+            })
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <h1 class="itlas-class">Loging</h1>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+            </div>
+
+
+            <div class="col">
+
+
+                <form>
+
+                    <div class="form-group">
+                        <label for="">usuario:</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+
+
+                    <button type="button" onclick="Login();" class="btn btn-primary">Ingresar</button>
+
+                </form>
+
+            </div>
+
+            <div class="col">
+            </div>
+
+</body>
+
+</html>
