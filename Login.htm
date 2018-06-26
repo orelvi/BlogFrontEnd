@@ -8,37 +8,9 @@
 
         <script src="assets/js/jquery.min.js"></script>
 
-    <script>
+        <script src="assets/js/formulario.js"></script>
 
-        function Login() {
-            var password = document.getElementById("password").value;
-            var usuario = document.getElementById("usuario").value;
-
-            var sendInfo = {
-                email: usuario,
-                password: password
-            };
-
-            console.log(sendInfo);
-
-            $.ajax({
-                method: "post",
-                url: "http://127.0.0.1:8080/login",
-                DataType: "json",
-                data: JSON.stringify(sendInfo),
-                success: function (data) {
-                    console.log(data);
-                },
-                
-
-                error: function (er) {
-                    alert("Usuario Equivocado");
-                    //console.log(er);
-                }
-            })
-        }
-
-    </script>
+    
 
 </head>
 
