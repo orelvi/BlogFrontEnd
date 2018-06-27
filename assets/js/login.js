@@ -3,14 +3,15 @@ function login() {
     var password = $("#password").val();
 
     LoginApi.login(email, password)
-        .then(function (token) {
-            console.log("Successfully: ", token);
-
-            //TODO: Registrar Token en Local Storage
-            //TODO: Debemos redireccionar al index
+        .then(function (responsen) {
+            console.log("Successfully: ", responsen);
+            var token = responsen.token;
+            window.localStorage.setItem("token", token);
+            window.location = "index.htm"
         })
 
         .catch(function (error) {
+            alert("Error: Intentelo nuevamente");
             console.log("Error", error);
         });
 

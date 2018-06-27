@@ -15,7 +15,6 @@ var LoginApi = (function () {
                 }
 
 
-
                 $.ajax({
                     method: 'POST',
                     data: JSON.stringify(ld),
@@ -31,14 +30,8 @@ var LoginApi = (function () {
 
             });
 
-
-
-
-
-
         }
     }
-
 
 
 })();

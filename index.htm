@@ -6,40 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
 
-    <script>
-        $.ajax({
-            url: "http://127.0.0.1:8080/users",
-            headers: { 'Authorization': 'Bearer 00600d01-cf83-437b-828e-822567c279fa' },
-            success: function (data) {
-                var table = $("#tabla_usuario");
-                data.forEach(function (usuario) {
-                    var tr = document.createElement("tr");
-                    var tdId = document.createElement("td");
-                    var tdEmail = document.createElement("td");
-                    var tdNombre = document.createElement("td");
-
-                    tdId.textContent = usuario.id;
-                    tdEmail.textContent = usuario.email;
-                    tdNombre.textContent = usuario.name;
-
-                    tr.appendChild(tdId);
-                    tr.appendChild(tdEmail);
-                    tr.appendChild(tdNombre);
-                    table.append(tr);
-
-
-                });
-
-                console.log(data);
-            },
-            error: function (er) {
-                console.log(er);
-            }
-        })
-
-    </script>
 
 </head>
 
@@ -47,27 +14,11 @@
 
     <div>
 
-        <div class="container">
 
-            <div class="row">
-                <div class="col">
-                    <h1 style="text-align:center">Bienvenido al Blog</h1>
-                </div>
+        <h1 style="text-align:center">Bienvenido al Blog</h1>
+    </div>
 
-            </div>
 
-            <table class="table" id="tabla_usuario">
-                <thead>
-
-                </thead>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Nombre</th>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
 
 </body>
 
