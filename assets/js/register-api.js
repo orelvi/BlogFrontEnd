@@ -1,12 +1,12 @@
-var LoginApi = (function () {
+var RegistroLogin = (function () {
 
     //TODO: BASE_URL
     var baseUrl = "http://127.0.0.1:8080";
-    var PATH = "/login";
+    var PATH = "/register";
 
     return {
 
-        login: function (email, password) {
+        registro: function (email, password) {
             return new Promise(function (resolve, reject) {
 
                 var ld = {
