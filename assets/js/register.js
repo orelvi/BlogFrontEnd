@@ -1,12 +1,16 @@
-function Registro() {
+function registro() {
+    var nombre = $("#nombre").val();
     var email = $("#email").val();
     var password = $("#password").val();
 
-    LoginApi.Registro(email, password)
+    console.log(nombre, email, password);
+    
+    
+    
+    RegistroApi.registro(nombre, email, password)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
-            var token = responsen.token;
-            window.localStorage.setItem("token", token);
+
             window.location = "index.htm"
         })
 
@@ -19,6 +23,6 @@ function Registro() {
 
 window.onload = function () {
     $("#bntRegistro").click(function () {
-        Registro();
+        registro();
     });
 }

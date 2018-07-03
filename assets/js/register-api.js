@@ -1,4 +1,4 @@
-var RegistroLogin = (function () {
+var RegistroApi = (function () {
 
     //TODO: BASE_URL
     var baseUrl = "http://127.0.0.1:8080";
@@ -6,14 +6,17 @@ var RegistroLogin = (function () {
 
     return {
 
-        registro: function (email, password) {
+        registro: function (nombre,email, password) {
             return new Promise(function (resolve, reject) {
 
                 var ld = {
+                   name:nombre,
                     email: email,
                     password: password
+                    
                 }
 
+                    console.log(ld);
 
                 $.ajax({
                     method: 'POST',
