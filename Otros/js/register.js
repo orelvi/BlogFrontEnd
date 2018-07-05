@@ -7,7 +7,7 @@ function registro() {
     
     
     
-    RegistroApi.registro(nombre, email, password)
+    LoginApi.register(nombre, email, password)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
 
