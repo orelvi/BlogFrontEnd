@@ -1,0 +1,24 @@
+ var token = window.localStorage.getItem("token");
+   if (token!==undefined){
+
+        window.location="index.htm";
+    }
+
+
+
+ <script>
+       
+       window.onload = function () {
+        $("#bntRegistro").click(function (){
+       var token = window.localStorage.getItem("token");
+
+        LoginApi.logout(token)
+        .then(function(date){
+            window.localStorage.removeItem("token");
+            window.location="login.htm";
+
+        })
+        .catch(err => console);
+        });
+
+        </script>

@@ -10,11 +10,16 @@
     <script src="assets/js/login-api.js"></script>
     <script src="assets/js/login.js"></script>
 
-<script>
+    <script>
+
+        var token = window.localStorage.getItem("token");
+        if (token !== null) {
+
+            window.location = "index.htm";
+        }
 
 
-
-</script>
+    </script>
 
 </head>
 

@@ -5,24 +5,10 @@
     <title>Blog Api</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-        <script src="assets/js/jquery-3.3.1.min.js"></script>
-        <script src="assets/js/login-api.js"></script>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/login-api.js"></script>
 
-        <script>
-       
-       window.onload = function () {
-        $("#bntRegistro").click(function (){
-       var token = window.localStorage.getItem("token");
-
-        LoginApi.logout(token)
-        .then(function(date){
-            window.localStorage.removeItem("token");
-            window.location="login.htm"
-
-        })
-        .catch(err => console)
-        });
-        </script>
+    
 
 
 
@@ -32,6 +18,7 @@
 
     <div>
 
+        <a href="#">Logout</a>
 
         <h1 style="text-align:center">Bienvenido al Blog</h1>
     </div>
@@ -39,5 +26,7 @@
 
 
 </body>
+
+
 
 </html>

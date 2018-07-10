@@ -11,6 +11,16 @@
     <script src="assets/js/login.js"></script>
 
 
+    <script>
+
+        var token = window.localStorage.getItem("token");
+        if (token !== null) {
+
+            window.location = "index.htm";
+        }
+
+
+    </script>
 
 </head>
 
