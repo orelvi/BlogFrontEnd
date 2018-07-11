@@ -34,7 +34,7 @@ var LoginApi = (function () {
 
         },
 
-        register: function (email, password,name) {
+        register: function (email, password, name) {
             return new Promise(function (resolve, reject) {
 
                 var ld = {
@@ -62,12 +62,12 @@ var LoginApi = (function () {
 
         },
 
-        logout: function (toke) {
+        logout: function (token) {
             return new Promise(function (resolve, reject) {
-
+                
                 $.ajax({
                     method: 'DELETE',
-                    headers:{'Authorization': 'Bearer'+toke} ,
+                    headers: { 'Authorization': 'Bearer ' + token },
                     url: baseUrl + PATH_LOGOUT,
                     success: function (data) {
                         resolve(data);
@@ -83,7 +83,7 @@ var LoginApi = (function () {
 
         }
 
-        }
+    }
 
 
-    }) ();
+})();

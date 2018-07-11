@@ -60,4 +60,8 @@ window.onload = function () {
      registrer();  
     });
 
+    $("#bntCancel").click(function () {
+        window.location = 'login.htm';
+      });
+
 }

@@ -7,8 +7,45 @@
         crossorigin="anonymous">
     <script src="assets/js/jquery-3.3.1.min.js"></script>
     <script src="assets/js/login-api.js"></script>
+    <script src="assets/js/post-api.js"></script>
+    <script src="assets/js/post.js"></script>
 
-    
+    <script>
+        window.onload = function () {
+
+            var token = window.localStorage.getItem("token");
+            if (token == null) {
+
+                window.location = "login.htm";
+
+               
+            }
+            else
+            {
+                cargaPost();
+            }
+
+
+            $("#logout").click(()=>{
+                var token = window.localStorage.getItem('token');
+                LoginApi.logout(token)
+                .then(function(data){
+
+                    window.localStorage.removeItem('token');
+                    window.location = 'login.htm';
+
+                })
+                .catch(err=> console.log(err));
+
+
+            });
+
+        }
+
+
+
+
+    </script>
 
 
 
@@ -18,7 +55,7 @@
 
     <div>
 
-        <a href="#">Logout</a>
+        <a href="#" id="logout">Logout</a>
 
         <h1 style="text-align:center">Bienvenido al Blog</h1>
     </div>
