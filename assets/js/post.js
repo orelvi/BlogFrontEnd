@@ -5,8 +5,6 @@ function cargaPost() {
     PostApi.getpost(token)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
-
-
         })
 
         .catch(function (error) {
