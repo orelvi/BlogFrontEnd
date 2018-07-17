@@ -7,7 +7,7 @@ function cargaPost() {
     PostApi.getpost(token)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
-            /*agregarRow();*/
+        
             
             responsen.forEach((v, i) => agregarRow(v));
         })
@@ -28,15 +28,7 @@ function agregarRow(post) {
     var tdTitle = document.createElement("td");
     var tdBody = document.createElement("td");
     var tdId = document.createElement("td");
-    /*var tdActions = document.createElement("td");*/
 
-    /* var btnEditar = document.createElement("button");
-    btnEditar.textContent = "Editar";
-    btnEditar.setAttribute("onclick", "editarEstudiante(this);"); */
-
-   /*  btnEditar.setAttribute("data-matricula", estudiante.matricula);
-    tdActions.appendChild(btnEditar);
- */
 
     var tr = document.createElement("tr");
     tdTitle.textContent = post.title;
@@ -47,7 +39,7 @@ function agregarRow(post) {
     tr.appendChild(tdTitle);
     tr.appendChild(tdBody);
     tr.appendChild(tdId);
-    /*tr.appendChild(btnEditar);*/
+
 
     tablaPost.appendChild(tr);
 
