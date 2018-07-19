@@ -8,7 +8,7 @@ function cargaPost() {
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
 
-            responsen.forEach((v, i) => agregarRow(v));
+           /* responsen.forEach((v, i) => agregarRow(v));*/
             responsen.forEach((v, i) => agregaPost(v));
         })
 
@@ -50,17 +50,37 @@ function agregarRow(post) {
 function agregaPost(post) {
     var DivPost = document.getElementById("Div_Post")
     var x = document.createElement("DIV");
-    var t = document.createTextNode(post.title);
+    var z = document.createElement("DIV");
+    var y = document.createElement("DIV");
+    
+    /*var t = document.createTextNode(post.title);*/
 
     var PostTitle = document.createElement("h1");
-    var PostBody = document.createElement("td");
-    var PostId = document.createElement("td");
-    var PostuserId = document.createElement("td");
+    var PostBody = document.createElement("p");
+    var PostuserId = document.createElement("h4");
+    var PostId = document.createElement("h6");
+    var ln = document.createElement("hr");
+    
+    PostTitle.textContent = post.title;
+    PostBody.textContent = post.body;
+    PostId.textContent = post.id;
+    PostuserId.textContent = post.userId
+
+    x.appendChild(PostTitle);
+    x.appendChild(PostuserId);
+    x.setAttribute("class", "panel-heading");
+    z.setAttribute("class", "panel-body");
+    z.appendChild(PostBody);
+    /*x.appendChild(PostId);*/
+    x.appendChild(z);
+    x.appendChild(ln);
+    
+    
+    /*x.setAttribute("style", "background-color: gray;");*/
+
+    /*x.appendChild(t);*/
 
 
-    x.setAttribute("style", "background-color: gray;");
-
-    x.appendChild(t);
     DivPost.appendChild(x);
 }
 
