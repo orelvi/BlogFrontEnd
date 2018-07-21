@@ -28,9 +28,63 @@ var PostApi = (function () {
             });
 
 
+            
+
+
+        },
+
+        getpostn: function (token,postid) {
+            return new Promise(function (resolve, reject) {
+
+                $.ajax({
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    url: baseUrl + PATH_POST+'/'+postid,
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+
+                });
+
+            });
+
+
+            
+
+
+        },
+
+        getcomment: function (token,postid) {
+            return new Promise(function (resolve, reject) {
+
+                $.ajax({
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    url: baseUrl + PATH_POST+'/'+postid+'/comment',
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+
+                });
+
+            });
+
+
         }
+        
 
     }
 
+    
+
+    
+
+    
 
 })();
