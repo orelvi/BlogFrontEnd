@@ -111,7 +111,7 @@ var PostApi = (function () {
                 $.ajax({
                     method: 'POST',
                     headers: { 'Authorization': 'Bearer ' + token },
-                    data: JSON.stringify(commetBody ),
+                    data: JSON.stringify(commetBody),
                     url: baseUrl + PATH_POST+'/'+postId+'/comment',
                     success: function (data) {
                         resolve(data);

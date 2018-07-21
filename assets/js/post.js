@@ -63,6 +63,27 @@ function cargaComment() {
 }
 
 
+function CreaComment() {
+    var body = $("#Comentario").val();
+    var postid = getQueryParam("id");
+    var token = window.localStorage.getItem("token");
+
+    PostApi.comment(body,token, postid)
+        .then(function (responsen) {
+            console.log("Successfully: ", responsen);
+            cargaPostN();
+
+            /*responsen.forEach((v, i) => agregarComent(v));
+            /*agregaPost(responsen);*/
+        })
+
+        .catch(function (error) {
+            console.log("Error", error);
+        });
+
+
+}
+
 
 function cargaUsuario(user) {
     var usuario
@@ -179,5 +200,7 @@ function getQueryParam(param) {
         })
     return param
 }
+
+
 
 
