@@ -4,6 +4,7 @@ var PostApi = (function () {
     var baseUrl = "http://127.0.0.1:8080";
     var PATH_POST = "/post";
     var PATH_USER = "/users";
+    var PATH_COMMENT=''
     //var PATH_LOGOUT = "/logout";
 
     return {
@@ -85,6 +86,33 @@ var PostApi = (function () {
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + token },
                     url: baseUrl + PATH_USER+'/'+userid,
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+
+                });
+
+            });
+
+
+        },
+
+        comment: function (body, token,postId) {
+            return new Promise(function (resolve, reject) {
+
+                var commetBody = {
+                    body: body
+                }
+
+
+                $.ajax({
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    data: JSON.stringify(commetBody ),
+                    url: baseUrl + PATH_POST+'/'+postId+'/comment',
                     success: function (data) {
                         resolve(data);
                     },
