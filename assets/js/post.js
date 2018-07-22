@@ -63,6 +63,8 @@ function cargaComment() {
 }
 
 
+
+
 function CreaPost() {
     var body = $("#NuevoPost").val();
     var title = $("#NuevoTitle").val();
@@ -72,7 +74,7 @@ function CreaPost() {
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
             /*agregarComent(responsen);*/
-            window.location = "index.htm";
+            window.location = 'post.htm?id=' + responsen.id;
 
 
         })
@@ -84,6 +86,26 @@ function CreaPost() {
 
 }
 
+function CreaComment() {
+        var body = $("#Comentario").val();
+        var postid = getQueryParam("id");
+        var token = window.localStorage.getItem("token");
+    
+        PostApi.comment(body,token, postid)
+            .then(function (responsen) {
+                console.log("Successfully: ", responsen);
+                document.getElementById('Comentario').value="";
+                cargaPostN();
+    
+                /*responsen.forEach((v, i) => agregarComent(v));
+                /*agregaPost(responsen);*/
+            })
+    
+            .catch(function (error) {
+                console.log("Error", error);
+            });
+
+        }
 
 function cargaUsuario(user) {
     var usuario;
@@ -204,6 +226,11 @@ function getQueryParam(param) {
     return param
 }
 
+function limpiarFormulario(inputs) {
 
+    inputs.forEach(function (v, i) {
+        document.getElementById(v).value = "";
+    });
+}
 
 
