@@ -63,18 +63,18 @@ function cargaComment() {
 }
 
 
-function CreaComment() {
-    var body = $("#Comentario").val();
-    var postid = getQueryParam("id");
+function CreaPost() {
+    var body = $("#NuevoPost").val();
+    var title = $("#NuevoTitle").val();
     var token = window.localStorage.getItem("token");
 
-    PostApi.comment(body,token, postid)
+    PostApi.newpost(title,body, token)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
-            cargaPostN();
+            /*agregarComent(responsen);*/
+            window.location = "index.htm";
 
-            /*responsen.forEach((v, i) => agregarComent(v));
-            /*agregaPost(responsen);*/
+
         })
 
         .catch(function (error) {
@@ -86,14 +86,14 @@ function CreaComment() {
 
 
 function cargaUsuario(user) {
-    var usuario
+    var usuario;
     /*var postid = getQueryParam("id");*/
     var token = window.localStorage.getItem("token");
 
     PostApi.getuser(token, user)
         .then(function (responsen) {
             console.log("Successfully: ", responsen.name);
-            usuario=(responsen.name);
+
             /*responsen.forEach((v, i) => agregarComent(v));*/
             /*agregaPost(responsen);*/
         })
@@ -101,7 +101,7 @@ function cargaUsuario(user) {
         .catch(function (error) {
             console.log("Error", error);
         });
-return(usuario);
+
 
 }
 
@@ -114,10 +114,13 @@ function agregarComent(Comment) {
     var x = document.createElement("DIV");
     var z = document.createElement("DIV");
     var y = document.createElement("DIV");
-    var usuario; 
-    /*var t = document.createTextNode(post.title);*/
 
-    usuario=cargaUsuario(Comment.userId);
+
+
+
+    var usuario = cargaUsuario(Comment.userId);
+
+    console.log(usuario);
 
     var CommentBody = document.createElement("p");
     var CommentUserId = document.createElement("h4");

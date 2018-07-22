@@ -4,7 +4,7 @@ var PostApi = (function () {
     var baseUrl = "http://127.0.0.1:8080";
     var PATH_POST = "/post";
     var PATH_USER = "/users";
-    var PATH_COMMENT=''
+    var PATH_COMMENT = ''
     //var PATH_LOGOUT = "/logout";
 
     return {
@@ -29,18 +29,18 @@ var PostApi = (function () {
             });
 
 
-            
+
 
 
         },
 
-        getpostn: function (token,postid) {
+        getpostn: function (token, postid) {
             return new Promise(function (resolve, reject) {
 
                 $.ajax({
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + token },
-                    url: baseUrl + PATH_POST+'/'+postid,
+                    url: baseUrl + PATH_POST + '/' + postid,
                     success: function (data) {
                         resolve(data);
                     },
@@ -53,39 +53,18 @@ var PostApi = (function () {
             });
 
 
-            
+
 
 
         },
 
-        getcomment: function (token,postid) {
+        getcomment: function (token, postid) {
             return new Promise(function (resolve, reject) {
 
                 $.ajax({
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + token },
-                    url: baseUrl + PATH_POST+'/'+postid+'/comment',
-                    success: function (data) {
-                        resolve(data);
-                    },
-                    error: function (error) {
-                        reject(error);
-                    }
-
-                });
-
-            });
-
-
-        }, 
-
-        getuser: function (token,userid) {
-            return new Promise(function (resolve, reject) {
-
-                $.ajax({
-                    method: 'GET',
-                    headers: { 'Authorization': 'Bearer ' + token },
-                    url: baseUrl + PATH_USER+'/'+userid,
+                    url: baseUrl + PATH_POST + '/' + postid + '/comment',
                     success: function (data) {
                         resolve(data);
                     },
@@ -100,7 +79,28 @@ var PostApi = (function () {
 
         },
 
-        comment: function (body, token,postId) {
+        getuser: function (token, userid) {
+            return new Promise(function (resolve, reject) {
+
+                $.ajax({
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    url: baseUrl + PATH_USER + '/' + userid,
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+
+                });
+
+            });
+
+
+        },
+
+        comment: function (body, token, postId) {
             return new Promise(function (resolve, reject) {
 
                 var commetBody = {
@@ -112,7 +112,38 @@ var PostApi = (function () {
                     method: 'POST',
                     headers: { 'Authorization': 'Bearer ' + token },
                     data: JSON.stringify(commetBody),
-                    url: baseUrl + PATH_POST+'/'+postId+'/comment',
+                    url: baseUrl + PATH_POST + '/' + postId + '/comment',
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+
+                });
+
+            });
+
+
+        },
+
+
+
+
+        newpost: function (title,body, token) {
+            return new Promise(function (resolve, reject) {
+
+                var postBody = {
+                    title:title,
+                    body: body
+                }
+
+
+                $.ajax({
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    data: JSON.stringify(postBody),
+                    url: baseUrl + PATH_POST,
                     success: function (data) {
                         resolve(data);
                     },
@@ -126,14 +157,12 @@ var PostApi = (function () {
 
 
         }
-        
-
     }
 
-    
 
-    
 
-    
+
+
+
 
 })();

@@ -7,7 +7,7 @@ function login() {
             console.log("Successfully: ", responsen);
             var token = responsen.token;
             window.localStorage.setItem("token", token);
-            window.location = "index.htm"
+            window.location = "index.htm";
         })
 
         .catch(function (error) {
