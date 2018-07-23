@@ -95,7 +95,7 @@ function CreaComment() {
             .then(function (responsen) {
                 console.log("Successfully: ", responsen);
                 document.getElementById('Comentario').value="";
-                cargaPostN();
+                agregarComent( responsen);
     
                 /*responsen.forEach((v, i) => agregarComent(v));
                 /*agregaPost(responsen);*/
