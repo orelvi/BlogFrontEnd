@@ -5,18 +5,68 @@ function cargaPost() {
 
 
     var token = window.localStorage.getItem("token");
-    PostApi.getpost(token)
-        .then(function (responsen) {
-            console.log("Successfully: ", responsen);
 
-            /* responsen.forEach((v, i) => agregarRow(v));*/
-            responsen.forEach((v, i) => agregaPost(v));
-        })
+    PostApi.getUsers(token)
+        .then(function (users) {
+            PostApi.getpost(token)
+                .then(function (responsen) {
+                    console.log("Successfully: ", responsen);
 
-        .catch(function (error) {
-            console.log("Error", error);
+                    /* responsen.forEach((v, i) => agregarRow(v));*/
+                    responsen.forEach((v, i) => {
+                        users.forEach((v1, i1) => {
+
+                            if (v1.id === v.userId) {
+                                v.name = v1.name;
+                                v.email = v1.email;
+                            }
+                        });
+                        // TODO: poner username and email
+
+                        agregaPost(v)
+                    });
+                })
+
+                .catch(function (error) {
+                    console.log("Error", error);
+                });
         });
 
+}
+
+
+
+function cargaPostNu() {
+
+
+    var token = window.localStorage.getItem("token");
+    var postid = getQueryParam("id");
+
+    PostApi.getUsers(token)
+        .then(function (users) {
+            PostApi.getpostn(token, postid)
+                .then(function (responsen) {
+                    console.log("Successfully: ", responsen);
+                    console.log("Successfully: ", users);
+                    /* responsen.forEach((v, i) => agregarRow(v));*/
+                   /*  responsen.forEach((v, i) => {
+                        users.forEach((v1, i1) => {
+
+                            if (v1.id === v.userId) {
+                                v.name = v1.name;
+                                v.email = v1.email;
+                            }
+                        });
+                        // TODO: poner username and email
+
+                        agregaPost(v)
+                    } );*/
+                })
+
+                .catch(function (error) {
+                    console.log("Error", error);
+                });
+        });
 
 }
 
@@ -71,7 +121,7 @@ function CreaPost() {
     var title = $("#NuevoTitle").val();
     var token = window.localStorage.getItem("token");
 
-    PostApi.newpost(title,body, token)
+    PostApi.newpost(title, body, token)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
             /*agregarComent(responsen);*/
@@ -88,68 +138,84 @@ function CreaPost() {
 }
 
 function CreaComment() {
-        var body = $("#Comentario").val();
-        var postid = getQueryParam("id");
-        var token = window.localStorage.getItem("token");
-    
-        PostApi.comment(body,token, postid)
-            .then(function (responsen) {
-                console.log("Successfully: ", responsen);
-                document.getElementById('Comentario').value="";
-                agregarComent( responsen);
-    
-                /*responsen.forEach((v, i) => agregarComent(v));
-                /*agregaPost(responsen);*/
-            })
-    
-            .catch(function (error) {
-                console.log("Error", error);
-            });
-
-        }
-
-function cargaUsuario(userId) {
-    var usuario=userId;
-    userName =[];
-    
-    /*var postid = getQueryParam("id");*/
+    var body = $("#Comentario").val();
+    var postid = getQueryParam("id");
     var token = window.localStorage.getItem("token");
 
-  /*  var nombre = function(token,userId) {
-    return
-    $.ajax({
-        method: 'GET',
-        headers: { 'Authorization': 'Bearer ' + token },
-        url: 'http://127.0.0.1:8080/users/'+userId,
-        success: function (data) {
-            console.log(data.name)
-        },
-        error: function (error) {
-            console.log("error")
-        }
+    PostApi.comment(body, token, postid)
+        .then(function (responsen) {
+            console.log("Successfully: ", responsen);
+            document.getElementById('Comentario').value = "";
+            agregarComent(responsen);
 
-    })}; */
-
-   /* console.log(nombre);*/
-
-/*return nombre;*/
-
-
-     var userName =PostApi.getuser(token, usuario)
-          .then(function (responsen) {
-            
-          console.log( responsen.name); 
-          return  responsen.name;         
-
-        
+            /*responsen.forEach((v, i) => agregarComent(v));
+            /*agregaPost(responsen);*/
         })
 
         .catch(function (error) {
             console.log("Error", error);
         });
+
+}
+
+function cargaUsuario(userId) {
+    var usuario = userId;
+    var userName;
+
+    /*var postid = getQueryParam("id");*/
+    var token = window.localStorage.getItem("token");
+
+    /*  var nombre = function(token,userId) {
+      return
+      $.ajax({
+          method: 'GET',
+          headers: { 'Authorization': 'Bearer ' + token },
+          url: 'http://127.0.0.1:8080/users/'+userId,
+          success: function (data) {
+              console.log(data.name)
+          },
+          error: function (error) {
+              console.log("error")
+          }
+  
+      })}; */
+
+    /* console.log(nombre);*/
+
+    /*return nombre;*/
+
+    $.ajax({
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token },
+        url: 'http://127.0.0.1:8080/users/' + userId,
+        success: function (data) {
+            console.log(data.name);
+            return (data.name);
+        },
+        error: function (error) {
+            console.log("error")
+        }
+
+    });
+
+
+
+
+    /*   var userName =PostApi.getuser(token, usuario)
+           .then(function (responsen) {
+             
+           console.log( responsen.name); 
+           return  responsen.name;         
  
-        console.log("Successfully: ", userName);
-return userName 
+         
+         })
+ 
+         .catch(function (error) {
+             console.log("Error", error);
+         });
+  
+         console.log("Successfully: ", userName);*/
+    /*return userName */
 
 }
 
@@ -166,9 +232,8 @@ function agregarComent(Comment) {
 
 
 
-   
 
-    cargaUsuario(Comment.userId);
+
 
     var CommentBody = document.createElement("p");
     var CommentUserId = document.createElement("h4");
@@ -179,7 +244,7 @@ function agregarComent(Comment) {
     CommentBody.textContent = Comment.body;
     CommentId.textContent = Comment.id;
 
-
+    console.log(cargaUsuario(Comment.userId));
 
     CommentUserId.textContent = Comment.userId;
 
@@ -221,7 +286,7 @@ function agregaPost(post) {
     PostTitle.textContent = post.title;
     PostBody.textContent = post.body;
     PostId.textContent = post.id;
-    PostuserId.textContent = post.userId
+    PostuserId.textContent = post.name + " (" + post.email + ")";
 
     Link.setAttribute('href', dir);
     Link.appendChild(PostTitle);

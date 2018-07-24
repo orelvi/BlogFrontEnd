@@ -87,6 +87,8 @@ var PostApi = (function () {
                     headers: { 'Authorization': 'Bearer ' + token },
                     url: baseUrl + PATH_USER + '/' + userid,
                     success: function (data) {
+                        var name= data.name;
+                        return name;
                         resolve(data);
                     },
                     error: function (error) {
@@ -95,6 +97,24 @@ var PostApi = (function () {
 
                 });
 
+            });
+
+
+        },
+
+        getUsers: function (token) {
+            return new Promise(function (resolve, reject) {
+                $.ajax({
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    url: baseUrl + PATH_USER ,
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+                });
             });
 
 
