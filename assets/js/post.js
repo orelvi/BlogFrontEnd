@@ -1,5 +1,6 @@
 
 
+
 function cargaPost() {
 
 
@@ -107,23 +108,48 @@ function CreaComment() {
 
         }
 
-function cargaUsuario(user) {
-    var usuario;
+function cargaUsuario(userId) {
+    var usuario=userId;
+    userName =[];
+    
     /*var postid = getQueryParam("id");*/
     var token = window.localStorage.getItem("token");
 
-    PostApi.getuser(token, user)
-        .then(function (responsen) {
-            console.log("Successfully: ", responsen.name);
+  /*  var nombre = function(token,userId) {
+    return
+    $.ajax({
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token },
+        url: 'http://127.0.0.1:8080/users/'+userId,
+        success: function (data) {
+            console.log(data.name)
+        },
+        error: function (error) {
+            console.log("error")
+        }
 
-            /*responsen.forEach((v, i) => agregarComent(v));*/
-            /*agregaPost(responsen);*/
+    })}; */
+
+   /* console.log(nombre);*/
+
+/*return nombre;*/
+
+
+     var userName =PostApi.getuser(token, usuario)
+          .then(function (responsen) {
+            
+          console.log( responsen.name); 
+          return  responsen.name;         
+
+        
         })
 
         .catch(function (error) {
             console.log("Error", error);
         });
-
+ 
+        console.log("Successfully: ", userName);
+return userName 
 
 }
 
@@ -140,9 +166,9 @@ function agregarComent(Comment) {
 
 
 
-    var usuario = cargaUsuario(Comment.userId);
+   
 
-    console.log(usuario);
+    cargaUsuario(Comment.userId);
 
     var CommentBody = document.createElement("p");
     var CommentUserId = document.createElement("h4");
