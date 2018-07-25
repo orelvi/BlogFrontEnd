@@ -23,7 +23,7 @@ function cargaPost() {
                         });
                         // TODO: poner username and email
 
-                        agregaPost(v)
+                        agregaPost(v);
                     });
                 })
 
@@ -42,32 +42,29 @@ function cargaPostNu() {
     var token = window.localStorage.getItem("token");
     var postid = getQueryParam("id");
 
-    PostApi.getUsers(token)
-        .then(function (users) {
-            PostApi.getpostn(token, postid)
+    PostApi.getpostn(token,postid)
+        .then(function (postresponsen) {
+             PostApi.getUser(token, postresponsen.userId)
                 .then(function (responsen) {
-                    console.log("Successfully: ", responsen);
-                    console.log("Successfully: ", users);
-                    /* responsen.forEach((v, i) => agregarRow(v));*/
-                   /*  responsen.forEach((v, i) => {
-                        users.forEach((v1, i1) => {
+                    
+                    console.log("Successfully: ", postresponsen.userId);
+                    console.log("Successfully: ", responsen.name);
+                    postresponsen.name=responsen.name;
+                    postresponsen.email=responsen.email;  
 
-                            if (v1.id === v.userId) {
-                                v.name = v1.name;
-                                v.email = v1.email;
-                            }
-                        });
-                        // TODO: poner username and email
+                    agregaPost(postresponsen)
 
-                        agregaPost(v)
-                    } );*/
+                    cargaComentNu();
+                                       
+                        
+                        
                 })
-
+ 
                 .catch(function (error) {
                     console.log("Error", error);
                 });
         });
-
+    
 }
 
 
@@ -115,6 +112,45 @@ function cargaComment() {
 
 
 
+function cargaComentNu() {
+
+
+    var token = window.localStorage.getItem("token");
+    var postid = getQueryParam("id");
+
+    PostApi.getUsers(token)
+        .then(function (users) {
+            PostApi.getcomment(token,postid)
+                .then(function (responsen) {
+                    console.log("Successfully: ", responsen);
+
+                    /* responsen.forEach((v, i) => agregarRow(v));*/
+                    responsen.forEach((v, i) => {
+                        users.forEach((v1, i1) => {
+
+                            if (v1.id === v.userId) {
+                                v.name = v1.name;
+                                v.email = v1.email;
+                            }
+                        });
+                        // TODO: poner username and email
+
+                        agregarComent(v);
+                    });
+                })
+
+                .catch(function (error) {
+                    console.log("Error", error);
+                });
+        });
+
+}
+
+
+
+
+
+
 
 function CreaPost() {
     var body = $("#NuevoPost").val();
@@ -148,8 +184,7 @@ function CreaComment() {
             document.getElementById('Comentario').value = "";
             agregarComent(responsen);
 
-            /*responsen.forEach((v, i) => agregarComent(v));
-            /*agregaPost(responsen);*/
+           
         })
 
         .catch(function (error) {
@@ -230,25 +265,17 @@ function agregarComent(Comment) {
     var y = document.createElement("DIV");
 
 
-
-
-
-
-
     var CommentBody = document.createElement("p");
     var CommentUserId = document.createElement("h4");
     var CommentId = document.createElement("h6");
 
 
-
     CommentBody.textContent = Comment.body;
-    CommentId.textContent = Comment.id;
+    CommentId.textContent = Comment.name;
 
     console.log(cargaUsuario(Comment.userId));
 
-    CommentUserId.textContent = Comment.userId;
-
-
+    CommentUserId.textContent = "By:"+Comment.name + "("+Comment.name+")";
 
     z.appendChild(CommentUserId);
     x.setAttribute('class', 'panel-heading');
