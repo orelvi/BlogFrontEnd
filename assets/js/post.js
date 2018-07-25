@@ -183,6 +183,7 @@ function CreaComment() {
             console.log("Successfully: ", responsen);
             document.getElementById('Comentario').value = "";
             agregarComent(responsen);
+            
 
            
         })
