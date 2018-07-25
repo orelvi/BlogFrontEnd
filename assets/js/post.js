@@ -221,7 +221,7 @@ function agregarComent(Comment) {
 
     
 
-    CommentUserId.textContent = "By:" + Comment.name + "(" + Comment.name + ")";
+    CommentUserId.textContent = "By:" + Comment.name + "(" + Comment.email + ")";
 
     z.appendChild(CommentUserId);
     x.setAttribute('class', 'panel-heading');
