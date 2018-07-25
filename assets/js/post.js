@@ -42,29 +42,29 @@ function cargaPostNu() {
     var token = window.localStorage.getItem("token");
     var postid = getQueryParam("id");
 
-    PostApi.getpostn(token,postid)
+    PostApi.getpostn(token, postid)
         .then(function (postresponsen) {
-             PostApi.getUser(token, postresponsen.userId)
+            PostApi.getUser(token, postresponsen.userId)
                 .then(function (responsen) {
-                    
+
                     console.log("Successfully: ", postresponsen.userId);
                     console.log("Successfully: ", responsen.name);
-                    postresponsen.name=responsen.name;
-                    postresponsen.email=responsen.email;  
+                    postresponsen.name = responsen.name;
+                    postresponsen.email = responsen.email;
 
                     agregaPost(postresponsen)
 
                     cargaComentNu();
-                                       
-                        
-                        
+
+
+
                 })
- 
+
                 .catch(function (error) {
                     console.log("Error", error);
                 });
         });
-    
+
 }
 
 
@@ -120,7 +120,7 @@ function cargaComentNu() {
 
     PostApi.getUsers(token)
         .then(function (users) {
-            PostApi.getcomment(token,postid)
+            PostApi.getcomment(token, postid)
                 .then(function (responsen) {
                     console.log("Successfully: ", responsen);
 
@@ -160,7 +160,6 @@ function CreaPost() {
     PostApi.newpost(title, body, token)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
-            /*agregarComent(responsen);*/
             window.location = 'post.htm?id=' + responsen.id;
 
 
@@ -181,11 +180,17 @@ function CreaComment() {
     PostApi.comment(body, token, postid)
         .then(function (responsen) {
             console.log("Successfully: ", responsen);
+            /*limpiarFormulario('Comentario');*/
             document.getElementById('Comentario').value = "";
-            agregarComent(responsen);
-            
 
-           
+
+            agregarComent(responsen);
+           /* location.reload();*/
+            /*Forzamos la recarga*/
+           /* location.reload(true);*/
+
+
+
         })
 
         .catch(function (error) {
@@ -194,66 +199,6 @@ function CreaComment() {
 
 }
 
-function cargaUsuario(userId) {
-    var usuario = userId;
-    var userName;
-
-    /*var postid = getQueryParam("id");*/
-    var token = window.localStorage.getItem("token");
-
-    /*  var nombre = function(token,userId) {
-      return
-      $.ajax({
-          method: 'GET',
-          headers: { 'Authorization': 'Bearer ' + token },
-          url: 'http://127.0.0.1:8080/users/'+userId,
-          success: function (data) {
-              console.log(data.name)
-          },
-          error: function (error) {
-              console.log("error")
-          }
-  
-      })}; */
-
-    /* console.log(nombre);*/
-
-    /*return nombre;*/
-
-    $.ajax({
-        method: 'GET',
-        headers: { 'Authorization': 'Bearer ' + token },
-        url: 'http://127.0.0.1:8080/users/' + userId,
-        success: function (data) {
-            console.log(data.name);
-            return (data.name);
-        },
-        error: function (error) {
-            console.log("error")
-        }
-
-    });
-
-
-
-
-    /*   var userName =PostApi.getuser(token, usuario)
-           .then(function (responsen) {
-             
-           console.log( responsen.name); 
-           return  responsen.name;         
- 
-         
-         })
- 
-         .catch(function (error) {
-             console.log("Error", error);
-         });
-  
-         console.log("Successfully: ", userName);*/
-    /*return userName */
-
-}
 
 
 function agregarComent(Comment) {
@@ -261,22 +206,22 @@ function agregarComent(Comment) {
 
 
     var DivPostComment = document.getElementById("Div_PostComment")
-    var x = document.createElement("DIV");
-    var z = document.createElement("DIV");
-    var y = document.createElement("DIV");
+    var x = document.createElement("div");
+    var z = document.createElement("div");
+    var y = document.createElement("div");
 
 
     var CommentBody = document.createElement("p");
-    var CommentUserId = document.createElement("h4");
+    var CommentUserId = document.createElement("h5");
     var CommentId = document.createElement("h6");
 
 
     CommentBody.textContent = Comment.body;
     CommentId.textContent = Comment.name;
 
-    console.log(cargaUsuario(Comment.userId));
+    
 
-    CommentUserId.textContent = "By:"+Comment.name + "("+Comment.name+")";
+    CommentUserId.textContent = "By:" + Comment.name + "(" + Comment.name + ")";
 
     z.appendChild(CommentUserId);
     x.setAttribute('class', 'panel-heading');
@@ -297,9 +242,9 @@ function agregarComent(Comment) {
 
 function agregaPost(post) {
     var DivPost = document.getElementById("Div_Post")
-    var x = document.createElement("DIV");
-    var z = document.createElement("DIV");
-    var y = document.createElement("DIV");
+    var x = document.createElement("div");
+    var z = document.createElement("div");
+    var y = document.createElement("div");
 
     /*var t = document.createTextNode(post.title);*/
 
